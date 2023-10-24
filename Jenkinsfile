@@ -3,24 +3,24 @@ pipeline {
     stages {
         stage('git repo & clean') {
             steps {
-               ///bat "rmdir /s /q HelloWorld"
+               bat "rmdir /s /q DemoForJenkinsPipelineGitHub"
                 bat "git clone https://github.com/Sabairram/HelloWorld.git"
-                bat "mvn clean -f HelloWorld"
+                bat "mvn clean -f DemoForJenkinsPipelineGitHub"
             }
         }
         stage('install') {
             steps {
-                bat "mvn install -f HelloWorld"
+                bat "mvn install -f DemoForJenkinsPipelineGitHub"
             }
         }
         stage('test') {
             steps {
-                bat "mvn test -f HelloWorld"
+                bat "mvn test -f DemoForJenkinsPipelineGitHub"
             }
         }
         stage('package') {
             steps {
-                bat "mvn package -f HelloWorld"
+                bat "mvn package -f DemoForJenkinsPipelineGitHub"
             }
         }
     }
