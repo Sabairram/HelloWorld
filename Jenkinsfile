@@ -1,14 +1,41 @@
 pipeline {
     agent any
+    
     stages {
-        stage('git repo & clean') {
+        stage('Checkout') {
             steps {
-                
-                bat "git clone https://github.com/Sabairram/HelloWorld.git"
-               
+                script {
+                    git 'https://github.com/Sabairram/HelloWorld.git'
+                }
             }
         }
         
+        stage('Build') {
+            steps {
+                script {
+                    bat(script: 'javac HelloWorld.java', returnStatus: true) // Use 'bat' on Windows
+                    
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                script {
+                    bat(script: 'java HelloWorld', returnStatus: true) // Use 'bat' on Windows
+                    
+                }
+            }
         }
     }
-
+    
+    post {
+        success {
+            echo 'Build successful!'
+        }
+        
+        failure {
+            echo 'Build failed!'
+        }
+    }
+}
